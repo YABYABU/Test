@@ -1,19 +1,18 @@
 <?php
 $id = $_GET["id"];
-$value = $_GET["value"];
-$value = trim($value);
 $fname = $id . ".txt";
 
-if ($value == "?") {
-    $f = fopen($fname, "r") or die("Unable to open file!");
-    echo fread($f, filesize($fname));
-    fclose($f);
-} elseif ($value == "ON" || $value == "OFF") {
-    $f = fopen($fname, "w") or die("Unable to open file!");
-    fputs($f, "> = " . $value);
-    fclose($f);
+// Read the content of the file
+$content = file_get_contents($fname);
 
-    // Output the updated value
-    echo "> = " . $value;
+// If the content is ON or OFF, toggle it
+if ($content == "ON") {
+    file_put_contents($fname, "OFF");
+    echo "OFF";
+} elseif ($content == "OFF") {
+    file_put_contents($fname, "ON");
+    echo "ON";
+} else {
+    echo "Error: Unable to determine the state.";
 }
 ?>
