@@ -9,13 +9,11 @@ if ($value == "?") {
     echo fread($f, filesize($fname));
     fclose($f);
 } elseif ($value == "ON" || $value == "OFF") {
-    $f = fopen($fname, "w") or die("Unable to open file!"); // don't append
+    $f = fopen($fname, "w") or die("Unable to open file!");
     fputs($f, "> = " . $value);
     fclose($f);
 
-    // Read and display the contents of the file
-    $f = fopen($fname, "r") or die("Unable to open file!");
-    echo fread($f, filesize($fname));
-    fclose($f);
+    // Output the updated value
+    echo "> = " . $value;
 }
 ?>
